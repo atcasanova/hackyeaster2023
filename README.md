@@ -1,6 +1,6 @@
 # Hacky Easter 2023
 
-I didn't really play Hacky Easter 2023 because I don't have the time, but I did manage to solve a few challenges. I'll share the ones I enjoyed the most. here.
+I didn't really play Hacky Easter 2023 because I don't have the time, but I did manage to solve a few challenges. I'll share the ones I enjoyed the most here.
 
 Note: This repository will remain private until the CTF concludes.
 
