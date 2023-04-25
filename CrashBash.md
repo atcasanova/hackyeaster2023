@@ -12,7 +12,7 @@ Note: The service is restarted every hour at x:00.
 
 <img width="351" alt="image" src="https://user-images.githubusercontent.com/2973929/234140051-1756aaaf-0755-4869-9753-3242fb4f15db.png">
 
-# Solution 1
+## Solution 1
 
 The challenge is basically a limited shell that will filter almost everything you try, including letters, `.` (dot) and a lot of other things.
 Luckily, just a few days before a friend showed me a WAF bypass he found using bash, that I will go through quickly:
