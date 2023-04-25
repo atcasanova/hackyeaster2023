@@ -1,11 +1,13 @@
+# Code Locked
+
 <img width="304" alt="image" src="https://user-images.githubusercontent.com/2973929/234139203-306f2b32-d408-4128-a8ce-64b023a2d7a4.png">
 
-# Description
+## Description
 Open the code lock at http://ch.hackyeaster.com:2311 to get your 🚩 flag.
 
 Note: The service is restarted every hour at x:00.
 
-# Solution
+## Solution
 
 The challenge presents a safe lock. After a quick reading of the code, we discover that the code should have 8 digits, and that you should press `#` to submit your guess, which will be checked by the checkWASM function.
 ```javascript
