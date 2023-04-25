@@ -9,7 +9,7 @@ Note: The service is restarted every hour at x:00.
 
 ## Solution
 
-The challenge presents a safe lock. After a quick reading of the code, we discover that the code should have 8 digits, and that you should press `#` to submit your guess, which will be checked by the checkWASM function.
+The challenge greets us with a safe lock. After examining the code, we find out that the lock code has 8 digits and pressing # submits our guess, which is then checked by the checkWASM function.
 
 ```javascript
 function press(input) {
@@ -36,7 +36,8 @@ function press(input) {
 }
 ```
 
-After a few minutes trying, the solution I came up with was to brute force the lock using the javascript console of my browser using the following function:
+After some tinkering, I came up with a plan to crack the lock by brute-forcing it using the browser's JavaScript console. I used this function to do the trick:
+
 ```javascript
 function checkLock() {
   const combinations = 100000000;
@@ -52,6 +53,5 @@ function checkLock() {
 ```
 <img width="291" alt="image" src="https://user-images.githubusercontent.com/2973929/234139821-36067129-b940-4169-9780-35d05761870e.png">
 
-Then all you had to do was to input this password in the lock using your mouse and hit `#`
-
+Finally, all I had to do was enter this code into the lock using my mouse and hit #. Voilà!
 
