@@ -10,6 +10,7 @@ Note: The service is restarted every hour at x:00.
 ## Solution
 
 The challenge presents a safe lock. After a quick reading of the code, we discover that the code should have 8 digits, and that you should press `#` to submit your guess, which will be checked by the checkWASM function.
+
 ```javascript
 function press(input) {
     if (input == "*") {

