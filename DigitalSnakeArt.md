@@ -1,6 +1,6 @@
 # Digital Snake Art
 
-## Challenge
+## Description
 I'm a big fan of digital art!
 
 How do you like my new gallery?
