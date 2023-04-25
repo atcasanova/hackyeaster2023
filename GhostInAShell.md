@@ -39,5 +39,6 @@ Then all you have to do is to find the zip file with the flag and unzip it. The 
 `alias fzip='/usr/bin/zip -P "/bin/funzip"'`
 
 easy:
+
 <img width="492" alt="image" src="https://user-images.githubusercontent.com/2973929/234147085-05325cf5-af79-4c7e-92ed-89df1ff4c5e5.png">
 
