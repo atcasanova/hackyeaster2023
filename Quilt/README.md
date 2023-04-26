@@ -14,7 +14,7 @@ This one was quite easy and I'm just writing this because I guess it was intende
 
 It's just a huge file full of QR codes and he says maybe we should split the file.
 
-But we won't need:
+But we won't need to:
 
 ```bash
 ➜  zbarimg quilt.png | cut -f2 -d:| tr -d '\n'
