@@ -8,6 +8,9 @@ This?
 
 [Kaos](https://docs.google.com/spreadsheets/d/1yxWyraRKss6Wqbw_ejuws6v92vwdE1AEAP1Cc8oec7M/edit#gid=0)?
 
+<img width="434" alt="image" src="https://user-images.githubusercontent.com/2973929/234678860-11fd5d26-1628-41b4-aea1-487bb23a29ae.png">
+
+
 ### hint
 Inputs are in the range 0..9.
 
@@ -99,4 +102,6 @@ sys     0m2.192s
 ```
 
 Checking it in the spreadsheet:
+
+<img width="403" alt="image" src="https://user-images.githubusercontent.com/2973929/234678965-ee3d2cc7-c4af-411f-b539-9f3a9368b6d1.png">
 
