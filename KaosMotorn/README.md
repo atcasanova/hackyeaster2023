@@ -14,7 +14,7 @@ This?
 ### hint
 Inputs are in the range 0..9.
 
-# Solution
+## Solution
 
 It's a complex spreadsheet where you can change values in some cells and the gray cells in the middle would change depending on them.
 
