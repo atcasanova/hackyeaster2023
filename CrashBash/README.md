@@ -24,12 +24,14 @@ This is just a `ls` command.
 Breaking it into parts:
 - `${0}` in your terminal refers to the shell you're in, in this case, `bash`
 - `<<<` indicates you're passing a [Here String](https://tldp.org/LDP/abs/html/x17837.html) to something.
-- `$(( ... ))` is the bash calculator
+- `$\'string\'` is an ANSI-C quoted string. In this form, backslashes can be used to escape characters.
+- `$(( ... ))` are arithmetic expansions, which allow you to perform arithmetic operations in the shell.
 - `1<<1` is a [Shift operation](https://www.interviewcake.com/concept/java/bit-shift) that results in `2`
-- `10011010` is the decimal `154` represented in binary. When preceded with a `\`, most shells will take it as octal. `\154` = `l`
-- `10100011` is the decimal `163` represented in binary. When preceded with a `\`, most shells will take it as octal. `\163` = `s`
+- `2#10011010` is a base conversion operation executed by the . It converts the number in base 2 to its decimal equivalent.
+- `10011010` is the decimal `154` represented in binary. When preceded with a `\`, most shells will take it as octal, which will be replaced by the character with the corresponding ASCII value `\154` = `108` = `l`
+- `10100011` is the decimal `163` represented in binary. When preceded with a `\`, most shells will take it as octal, which will be replaced by the character with the corresponding ASCII value `\163` = `115` = `s`
 
-So in steps what we've got:
+So in steps this is what we've got:
 
 `bash<<<$\'\\$((2#10011010))\\$((2#10100011))\'`
 
@@ -39,7 +41,7 @@ then:
 
 and finally:
 
-`bash<<<$\'ls'`
+`bash<<<$\'ls\'`
 
 In essence, this bypass uses a very strict and small character set.
 
@@ -133,7 +135,7 @@ A=ABCDEFGHIJKLMNOPQRSTUVWXYZ B=$A${A,,}0123456789_/${REMOTE_HOST//[0-9]/}
 echo -n 'A=ABCDEFGHIJKLMNOPQRSTUVWXYZ;B=$A${A,,}0123456789_/${REMOTE_HOST//[0-9]/};'
 
 while read -n1 char; do
-        (( ${#char} != 1 )) && { print+=" "; echo -n " "; continue; }
+        (( ${#char} != 1 )) && { echo -n " "; continue; }
         for (( i=0; i<=${#B}; i++ )); do
                 [ "${B:$i:1}" == "$char" ] && { echo -n "\${B:$i:1}"; break;}
                 (( i == ${#B} )) && { echo "faltou $char"; exit; }
