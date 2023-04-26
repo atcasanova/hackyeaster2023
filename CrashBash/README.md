@@ -27,7 +27,7 @@ Breaking it into parts:
 - `$\'string\'` is an ANSI-C quoted string. In this form, backslashes can be used to escape characters.
 - `$(( ... ))` are arithmetic expansions, which allow you to perform arithmetic operations in the shell.
 - `1<<1` is a [Shift operation](https://www.interviewcake.com/concept/java/bit-shift) that results in `2`
-- `2#10011010` is a base conversion operation executed by the . It converts the number in base 2 to its decimal equivalent.
+- `2#10011010` is a base conversion operation executed by the arithmetic expansion. It converts the number in base 2 to its decimal equivalent.
 - `10011010` is the decimal `154` represented in binary. When preceded with a `\`, most shells will take it as octal, which will be replaced by the character with the corresponding ASCII value `\154` = `108` = `l`
 - `10100011` is the decimal `163` represented in binary. When preceded with a `\`, most shells will take it as octal, which will be replaced by the character with the corresponding ASCII value `\163` = `115` = `s`
 
