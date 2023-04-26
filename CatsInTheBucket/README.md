@@ -27,7 +27,8 @@ role=$(aws s3api get-bucket-policy --bucket cats-in-a-bucket | \
 output=$(aws sts assume-role --role-arn $role --role-session-name "MySession");
 export AWS_ACCESS_KEY_ID=$(jq -r '.Credentials.AccessKeyId' <<< $output);
 export AWS_SECRET_ACCESS_KEY=$(jq -r '.Credentials.SecretAccessKey' <<< $output);
-export AWS_SESSION_TOKEN=$(jq -r '.Credentials.SessionToken' <<< $output); echo $AWS_SECRET_ACCESS_KEY,$AWS_SESSION_TOKEN,$AWS_ACCESS_KEY_ID;
+export AWS_SESSION_TOKEN=$(jq -r '.Credentials.SessionToken' <<< $output); 
+echo $AWS_SECRET_ACCESS_KEY,$AWS_SESSION_TOKEN,$AWS_ACCESS_KEY_ID;
 aws sts get-caller-identity;
 aws s3 cp s3://cats-in-a-bucket/cat4.jpg cat4.jpg
 ```
