@@ -46,6 +46,7 @@ function checkLock() {
     const result = checkWASM(combination);
     if (result !== "You did not open the lock!") {
       console.log("Senha:", combination);
+      console.log(result);
       break;
     }
   }
