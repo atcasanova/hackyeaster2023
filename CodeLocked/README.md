@@ -52,7 +52,8 @@ function checkLock() {
   }
 }
 ```
-<img width="291" alt="image" src="https://user-images.githubusercontent.com/2973929/234139821-36067129-b940-4169-9780-35d05761870e.png">
+<img width="457" alt="image" src="https://user-images.githubusercontent.com/2973929/234874086-e8c74d0c-ec90-4d90-a0a3-23e393b3581d.png">
 
-Finally, all I had to do was enter this code into the lock using my mouse and hit #. Voilà!
+
+Voilà!
 
