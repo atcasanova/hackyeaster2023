@@ -18,7 +18,7 @@ Inputs are in the range 0..9.
 
 It's a complex spreadsheet where you could change values in some cells and the gray cells in the middle would change depending on them.
 
-What I did was to get the formula for gray each cell, in order, and reverse their formulas in (yet another) bash script.
+What I did was to get the formula for each gray cell, in order, and reverse their formulas in (yet another) bash script.
 
 ```bash
 #!/bin/bash
